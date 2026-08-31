@@ -1,0 +1,129 @@
+import java.util.Scanner;
+
+public class SalaryTransformationSystem {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Employee details
+        System.out.println("===== SALARY TRANSFORMATION SYSTEM =====");
+
+        System.out.print("Enter Employee ID: ");
+        int employeeId = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Enter Employee Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Department: ");
+        String department = sc.nextLine();
+
+        System.out.print("Enter Designation: ");
+        String designation = sc.nextLine();
+
+        // Salary details
+        System.out.print("Enter Basic Salary: ");
+        double basicSalary = sc.nextDouble();
+
+        // Allowances
+        double hra = basicSalary * 0.40;   // 40% HRA
+        double da = basicSalary * 0.20;    // 20% DA
+
+        System.out.print("Enter Other Allowances: ");
+        double otherAllowance = sc.nextDouble();
+
+        System.out.print("Enter Bonus: ");
+        double bonus = sc.nextDouble();
+
+        // Gross salary
+        double grossSalary = basicSalary + hra + da
+                + otherAllowance + bonus;
+
+        // Deductions
+        double pf = basicSalary * 0.12;    // 12% PF
+
+        System.out.print("Enter Tax Deduction: ");
+        double tax = sc.nextDouble();
+
+        System.out.print("Enter Other Deductions: ");
+        double otherDeduction = sc.nextDouble();
+
+        // Total deductions
+        double totalDeduction = pf + tax + otherDeduction;
+
+        // Net salary
+        double netSalary = grossSalary - totalDeduction;
+
+        // Display salary details
+        System.out.println("\n========================================");
+        System.out.println("          EMPLOYEE SALARY SLIP");
+        System.out.println("========================================");
+
+        System.out.println("Employee ID     : " + employeeId);
+        System.out.println("Employee Name   : " + name);
+        System.out.println("Department      : " + department);
+        System.out.println("Designation     : " + designation);
+
+        System.out.println("----------------------------------------");
+        System.out.println("Basic Salary    : ₹" + basicSalary);
+        System.out.println("HRA             : ₹" + hra);
+        System.out.println("DA              : ₹" + da);
+        System.out.println("Other Allowance : ₹" + otherAllowance);
+        System.out.println("Bonus           : ₹" + bonus);
+
+        System.out.println("----------------------------------------");
+        System.out.println("Gross Salary    : ₹" + grossSalary);
+
+        System.out.println("\nDeductions");
+        System.out.println("PF              : ₹" + pf);
+        System.out.println("Tax             : ₹" + tax);
+        System.out.println("Other Deduction : ₹" + otherDeduction);
+        System.out.println("Total Deduction : ₹" + totalDeduction);
+
+        System.out.println("----------------------------------------");
+        System.out.println("NET SALARY      : ₹" + netSalary);
+        System.out.println("========================================");
+
+        sc.close();
+    }
+}
+
+INPUT:
+===== SALARY TRANSFORMATION SYSTEM =====
+Enter Employee ID: 101
+Enter Employee Name: Mohammed
+Enter Department: Computer Science
+Enter Designation: Software Developer
+Enter Basic Salary: 25000
+Enter Other Allowances: 3000
+Enter Bonus: 2000
+Enter Tax Deduction: 2000
+Enter Other Deductions: 1000
+
+OUTPUT:
+========================================
+          EMPLOYEE SALARY SLIP
+========================================
+Employee ID     : 101
+Employee Name   : Mohammed
+Department      : Computer Science
+Designation     : Software Developer
+----------------------------------------
+Basic Salary    : ₹25000.0
+HRA             : ₹10000.0
+DA              : ₹5000.0
+Other Allowance : ₹3000.0
+Bonus           : ₹2000.0
+----------------------------------------
+Gross Salary    : ₹45000.0
+
+Deductions
+PF              : ₹3000.0
+Tax             : ₹2000.0
+Other Deduction : ₹1000.0
+Total Deduction : ₹6000.0
+----------------------------------------
+NET SALARY      : ₹39000.0
+========================================
+
