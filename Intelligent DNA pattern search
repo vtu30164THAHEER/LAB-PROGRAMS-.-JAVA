@@ -1,0 +1,96 @@
+import java.util.Scanner;
+
+public class IntelligentDNAPatternSearch {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("======================================");
+        System.out.println("     INTELLIGENT DNA PATTERN SEARCH");
+        System.out.println("======================================");
+
+        System.out.print("Enter DNA Sequence: ");
+        String dna = sc.nextLine().toUpperCase();
+
+        System.out.print("Enter DNA Pattern: ");
+        String pattern = sc.nextLine().toUpperCase();
+
+        // Validate DNA sequence
+        if (!isValidDNA(dna) || !isValidDNA(pattern)) {
+            System.out.println("\nInvalid DNA sequence!");
+            System.out.println("Only A, T, G and C are allowed.");
+            sc.close();
+            return;
+        }
+
+        boolean found = false;
+        int count = 0;
+
+        System.out.println("\nPattern Search Result:");
+
+        // Search pattern
+        for (int i = 0; i <= dna.length() - pattern.length(); i++) {
+
+            String part = dna.substring(i, i + pattern.length());
+
+            if (part.equals(pattern)) {
+                System.out.println(
+                    "Pattern found at position: " + (i + 1)
+                );
+
+                count++;
+                found = true;
+            }
+        }
+
+        System.out.println("\n======================================");
+
+        if (found) {
+            System.out.println("Pattern Found Successfully!");
+            System.out.println("Pattern        : " + pattern);
+            System.out.println("Occurrences     : " + count);
+        } else {
+            System.out.println("Pattern not found.");
+        }
+
+        System.out.println("======================================");
+
+        sc.close();
+    }
+
+    // Method to validate DNA characters
+    static boolean isValidDNA(String sequence) {
+
+        for (int i = 0; i < sequence.length(); i++) {
+
+            char ch = sequence.charAt(i);
+
+            if (ch != 'A' && ch != 'T' &&
+                ch != 'G' && ch != 'C') {
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+OUTPUT : 
+======================================
+     INTELLIGENT DNA PATTERN SEARCH
+======================================
+Enter DNA Sequence: ATGCGATGCGAT
+Enter DNA Pattern: ATG
+
+Pattern Search Result:
+Pattern found at position: 1
+Pattern found at position: 6
+Pattern found at position: 9
+
+======================================
+Pattern Found Successfully!
+Pattern        : ATG
+Occurrences     : 3
+======================================
