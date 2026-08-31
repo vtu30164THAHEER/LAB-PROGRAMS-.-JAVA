@@ -1,0 +1,89 @@
+import java.util.Scanner;
+
+public class MaximumProfitAnalyzer {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("====================================");
+        System.out.println("       MAXIMUM PROFIT ANALYZER");
+        System.out.println("====================================");
+
+        System.out.print("Enter number of days: ");
+        int n = sc.nextInt();
+
+        int[] prices = new int[n];
+
+        System.out.println("Enter stock prices:");
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Day " + (i + 1) + ": ");
+            prices[i] = sc.nextInt();
+        }
+
+        int minPrice = prices[0];
+        int maxProfit = 0;
+        int buyDay = 1;
+        int sellDay = 1;
+
+        for (int i = 1; i < n; i++) {
+
+            // Calculate profit
+            int profit = prices[i] - minPrice;
+
+            // Update maximum profit
+            if (profit > maxProfit) {
+                maxProfit = profit;
+                sellDay = i + 1;
+            }
+
+            // Update minimum price
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+                buyDay = i + 1;
+            }
+        }
+
+        System.out.println("\n====================================");
+        System.out.println("        PROFIT ANALYSIS");
+        System.out.println("====================================");
+
+        System.out.println("Maximum Profit : ₹" + maxProfit);
+
+        if (maxProfit > 0) {
+            System.out.println("Buy Day        : Day " + buyDay);
+            System.out.println("Sell Day       : Day " + sellDay);
+            System.out.println("Profit         : ₹" + maxProfit);
+        } else {
+            System.out.println("No Profit can be made.");
+        }
+
+        System.out.println("====================================");
+
+        sc.close();
+    }
+}
+
+OUTPUT :
+====================================
+       MAXIMUM PROFIT ANALYZER
+====================================
+Enter number of days: 6
+
+Enter stock prices:
+Day 1: 7
+Day 2: 1
+Day 3: 5
+Day 4: 3
+Day 5: 6
+Day 6: 4
+
+====================================
+        PROFIT ANALYSIS
+====================================
+Maximum Profit : ₹5
+Buy Day        : Day 2
+Sell Day       : Day 5
+Profit         : ₹5
+====================================
