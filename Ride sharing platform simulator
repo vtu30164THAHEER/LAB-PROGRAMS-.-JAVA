@@ -1,0 +1,242 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class RideSharingPlatform {
+
+    static ArrayList<String> riders = new ArrayList<>();
+    static ArrayList<String> drivers = new ArrayList<>();
+
+    static String riderName;
+    static String driverName;
+    static String pickup;
+    static String destination;
+    static double distance;
+    static double fare;
+
+    // Add rider
+    static void addRider(String name) {
+        riders.add(name);
+        System.out.println("Rider registered successfully.");
+    }
+
+    // Add driver
+    static void addDriver(String name) {
+        drivers.add(name);
+        System.out.println("Driver registered successfully.");
+    }
+
+    // Request ride
+    static void requestRide(Scanner sc) {
+
+        if (riders.isEmpty()) {
+            System.out.println("No riders available.");
+            return;
+        }
+
+        if (drivers.isEmpty()) {
+            System.out.println("No drivers available.");
+            return;
+        }
+
+        System.out.print("Enter Rider Name: ");
+        riderName = sc.nextLine();
+
+        if (!riders.contains(riderName)) {
+            System.out.println("Rider not found.");
+            return;
+        }
+
+        System.out.print("Enter Pickup Location: ");
+        pickup = sc.nextLine();
+
+        System.out.print("Enter Destination: ");
+        destination = sc.nextLine();
+
+        System.out.print("Enter Distance (km): ");
+        distance = sc.nextDouble();
+        sc.nextLine();
+
+        // Assign first available driver
+        driverName = drivers.get(0);
+
+        // Fare calculation
+        double baseFare = 50;
+        double costPerKm = 15;
+
+        fare = baseFare + (distance * costPerKm);
+
+        System.out.println("\nRide booked successfully!");
+        System.out.println("Driver Assigned: " + driverName);
+    }
+
+    // Display ride details
+    static void showRideDetails() {
+
+        if (riderName == null) {
+            System.out.println("No ride has been booked.");
+            return;
+        }
+
+        System.out.println("\n======================================");
+        System.out.println("          RIDE DETAILS");
+        System.out.println("======================================");
+
+        System.out.println("Rider           : " + riderName);
+        System.out.println("Driver          : " + driverName);
+        System.out.println("Pickup Location : " + pickup);
+        System.out.println("Destination     : " + destination);
+        System.out.println("Distance        : " + distance + " km");
+        System.out.println("Base Fare       : ₹50");
+        System.out.println("Fare per KM     : ₹15");
+        System.out.println("Total Fare      : ₹" + fare);
+
+        System.out.println("======================================");
+    }
+
+    // Display riders
+    static void showRiders() {
+
+        System.out.println("\n===== REGISTERED RIDERS =====");
+
+        if (riders.isEmpty()) {
+            System.out.println("No riders registered.");
+        } else {
+            for (String rider : riders) {
+                System.out.println("- " + rider);
+            }
+        }
+    }
+
+    // Display drivers
+    static void showDrivers() {
+
+        System.out.println("\n===== AVAILABLE DRIVERS =====");
+
+        if (drivers.isEmpty()) {
+            System.out.println("No drivers available.");
+        } else {
+            for (String driver : drivers) {
+                System.out.println("- " + driver);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int choice;
+
+        System.out.println("======================================");
+        System.out.println("      RIDE SHARING PLATFORM");
+        System.out.println("             SIMULATOR");
+        System.out.println("======================================");
+
+        do {
+
+            System.out.println("\n1. Register Rider");
+            System.out.println("2. Register Driver");
+            System.out.println("3. Request Ride");
+            System.out.println("4. Show Ride Details");
+            System.out.println("5. Show Riders");
+            System.out.println("6. Show Drivers");
+            System.out.println("7. Exit");
+
+            System.out.print("\nEnter your choice: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+
+                case 1:
+                    System.out.print("Enter Rider Name: ");
+                    String rider = sc.nextLine();
+                    addRider(rider);
+                    break;
+
+                case 2:
+                    System.out.print("Enter Driver Name: ");
+                    String driver = sc.nextLine();
+                    addDriver(driver);
+                    break;
+
+                case 3:
+                    requestRide(sc);
+                    break;
+
+                case 4:
+                    showRideDetails();
+                    break;
+
+                case 5:
+                    showRiders();
+                    break;
+
+                case 6:
+                    showDrivers();
+                    break;
+
+                case 7:
+                    System.out.println(
+                        "\nThank you for using Ride Sharing Platform!"
+                    );
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 7);
+
+        sc.close();
+    }
+}
+
+OUTPUT :
+======================================
+      RIDE SHARING PLATFORM
+             SIMULATOR
+======================================
+
+1. Register Rider
+2. Register Driver
+3. Request Ride
+4. Show Ride Details
+5. Show Riders
+6. Show Drivers
+7. Exit
+
+Enter your choice: 1
+
+Enter Rider Name: Mohammed
+Rider registered successfully.
+
+Enter your choice: 2
+
+Enter Driver Name: Arun
+Driver registered successfully.
+
+Enter your choice: 3
+
+Enter Rider Name: Mohammed
+Enter Pickup Location: Veltech University
+Enter Destination: Chennai Central
+Enter Distance (km): 20
+
+Ride booked successfully!
+Driver Assigned: Arun
+
+Enter your choice: 4
+
+======================================
+          RIDE DETAILS
+======================================
+Rider           : Mohammed
+Driver          : Arun
+Pickup Location : Veltech University
+Destination     : Chennai Central
+Distance        : 20.0 km
+Base Fare       : ₹50
+Fare per KM     : ₹15
+Total Fare      : ₹350.0
+======================================
