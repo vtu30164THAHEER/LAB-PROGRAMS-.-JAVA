@@ -1,0 +1,140 @@
+import java.util.Scanner;
+
+public class RealTimeStreamAnalytics {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int totalEvents = 0;
+        double totalValue = 0;
+        double maxValue = Double.MIN_VALUE;
+        double minValue = Double.MAX_VALUE;
+
+        System.out.println("==========================================");
+        System.out.println("     REAL-TIME STREAM ANALYTICS ENGINE");
+        System.out.println("==========================================");
+
+        System.out.print("Enter number of events: ");
+        int n = sc.nextInt();
+
+        for (int i = 1; i <= n; i++) {
+
+            System.out.println("\nEvent " + i);
+
+            System.out.print("Enter Event ID: ");
+            int eventId = sc.nextInt();
+
+            System.out.print("Enter Sensor Value: ");
+            double value = sc.nextDouble();
+
+            // Process stream data
+            totalEvents++;
+            totalValue += value;
+
+            if (value > maxValue) {
+                maxValue = value;
+            }
+
+            if (value < minValue) {
+                minValue = value;
+            }
+
+            // Display real-time result
+            System.out.println("Event ID     : " + eventId);
+            System.out.println("Value        : " + value);
+
+            // Alert detection
+            if (value > 80) {
+                System.out.println("ALERT: High value detected!");
+            } else if (value < 20) {
+                System.out.println("ALERT: Low value detected!");
+            } else {
+                System.out.println("Status       : Normal");
+            }
+
+            double average = totalValue / totalEvents;
+
+            System.out.println("Current Average: " + average);
+        }
+
+        // Final analytics
+        double average = totalValue / totalEvents;
+
+        System.out.println("\n==========================================");
+        System.out.println("          STREAM ANALYTICS REPORT");
+        System.out.println("==========================================");
+
+        System.out.println("Total Events    : " + totalEvents);
+        System.out.println("Total Value     : " + totalValue);
+        System.out.println("Average Value   : " + average);
+        System.out.println("Maximum Value   : " + maxValue);
+        System.out.println("Minimum Value   : " + minValue);
+
+        System.out.println("==========================================");
+        System.out.println("Analytics completed successfully.");
+        System.out.println("==========================================");
+
+        sc.close();
+    }
+}
+
+OUTPUT:
+==========================================
+     REAL-TIME STREAM ANALYTICS ENGINE
+==========================================
+Enter number of events: 5
+
+Event 1
+Enter Event ID: 101
+Enter Sensor Value: 45
+Event ID     : 101
+Value        : 45.0
+Status       : Normal
+Current Average: 45.0
+
+Event 2
+Enter Event ID: 102
+Enter Sensor Value: 75
+Event ID     : 102
+Value        : 75.0
+Status       : Normal
+Current Average: 60.0
+
+Event 3
+Enter Event ID: 103
+Enter Sensor Value: 90
+Event ID     : 103
+Value        : 90.0
+ALERT: High value detected!
+Current Average: 70.0
+
+Event 4
+Enter Event ID: 104
+Enter Sensor Value: 15
+Event ID     : 104
+Value        : 15.0
+ALERT: Low value detected!
+Current Average: 56.25
+
+Event 5
+Enter Event ID: 105
+Enter Sensor Value: 60
+Event ID     : 105
+Value        : 60.0
+Status       : Normal
+Current Average: 57.0
+
+==========================================
+          STREAM ANALYTICS REPORT
+==========================================
+Total Events    : 5
+Total Value     : 285.0
+Average Value   : 57.0
+Maximum Value   : 90.0
+Minimum Value   : 15.0
+==========================================
+Analytics completed successfully.
+==========================================
+
+
