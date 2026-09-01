@@ -1,0 +1,40 @@
+import java.util.*;
+
+public class HashtagFrequencyCounter {
+
+    public static void main(String[] args) {
+
+        String text = "I love #Java and #Coding. #Java is easy. " +
+                      "#Coding is fun. I am learning #Java.";
+
+        // Map to store hashtag and its frequency
+        HashMap<String, Integer> frequency = new HashMap<>();
+
+        // Split the text into words
+        String[] words = text.split("\\s+");
+
+        for (String word : words) {
+
+            // Remove punctuation
+            word = word.replaceAll("[^#a-zA-Z0-9]", "");
+
+            // Check if the word is a hashtag
+            if (word.startsWith("#") && word.length() > 1) {
+
+                frequency.put(word,
+                        frequency.getOrDefault(word, 0) + 1);
+            }
+        }
+
+        // Display hashtag frequencies
+        System.out.println("Hashtag Frequencies:");
+
+        for (Map.Entry<String, Integer> entry : frequency.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+    }
+}
+OUTPUT:
+#Java : 3
+#Python : 2
+#Coding : 1
